@@ -116,13 +116,14 @@ Project\ Logs*/
 *.makerbot
 *.thing
 *.x3g
+*.3mf
 
 # STL files (usually generated, but comment this out if you want to track them)
-# *.stl
+*.stl
 
 # STEP files (usually generated, but comment this out if you want to track them)
-# *.step
-# *.stp
+*.step
+*.stp
 
 # Simulation and analysis
 *.sim
