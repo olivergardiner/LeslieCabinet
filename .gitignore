@@ -1,0 +1,141 @@
+# General CAD backup and temporary files
+*.bak
+*.tmp
+*.temp
+*~
+*.swp
+*.swo
+*.log
+.DS_Store
+Thumbs.db
+
+# KiCad PCB Design
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*.kicad_prl
+*.kicad_pro-bak
+*-backups/
+fp-info-cache
+*.net
+*.xml
+*.csv
+*.tsv
+*.txt.bak
+_autosave-*
+*.bck
+*.kicad_pcb.lck
+*.kicad_sch.lck
+*rescue.lib
+*rescue.dcm
+*-cache.lib
+*-cache.dcm
+*.gbr
+*.drl
+*.pos
+*.rpt
+*.pdf.bak
+
+# FreeCAD
+*.FCStd1
+*.FCStd2
+*.FCStd3
+*.FCStd4
+*.FCStd5
+*.FCStd6
+*.FCStd7
+*.FCStd8
+*.FCStd9
+
+# Fusion 360
+*.f3d.lock
+*.f3z.lock
+
+# AutoCAD
+*.dwl
+*.dwl2
+*.sv$
+*.ac$
+*.dmp
+
+# SolidWorks
+~$*
+*.SLDPRT.bak
+*.SLDASM.bak
+*.SLDDRW.bak
+
+# Inventor
+OldVersions/
+*.ipt.bak
+*.iam.bak
+*.idw.bak
+
+# CATIA
+*.CATProduct.lock
+*.CATPart.lock
+*.CATDrawing.lock
+
+# Creo/Pro-E
+*.log.*
+*.err.*
+*.inf.*
+*.tst
+*.mbx
+std.out
+std.err
+trail.*
+*.m_p
+versions/
+temp/
+
+# SketchUp
+*.skb
+
+# Blender
+*.blend1
+*.blend2
+*.blend3
+*.blend4
+*.blend5
+
+# Altium
+__Previews/
+History/
+Project\ Logs*/
+*.OutJob.Zip
+
+# Eagle PCB
+*.b#*
+*.s#*
+*.l#*
+
+# General 3D printing / slicing
+*.gcode
+*.gco
+*.g
+*.ufp
+*.makerbot
+*.thing
+*.x3g
+
+# STL files (usually generated, but comment this out if you want to track them)
+# *.stl
+
+# STEP files (usually generated, but comment this out if you want to track them)
+# *.step
+# *.stp
+
+# Simulation and analysis
+*.sim
+*.out
+*.res
+*.rst
+*.cdb
+*.db
+
+# Build artifacts
+build/
+dist/
+output/
+export/
+gerbers/
+fabrication/
