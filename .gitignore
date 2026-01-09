@@ -23,7 +23,6 @@ fp-info-cache
 *.txt.bak
 _autosave-*
 *.bck
-*.bak
 *.kicad_pcb.lck
 *.kicad_sch.lck
 *rescue.lib
@@ -54,7 +53,6 @@ _autosave-*
 # AutoCAD
 *.dwl
 *.dwl2
-*.bak
 *.sv$
 *.ac$
 *.dmp
