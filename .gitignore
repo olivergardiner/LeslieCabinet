@@ -8,6 +8,7 @@
 *.log
 .DS_Store
 Thumbs.db
+~*.dxf
 
 # KiCad PCB Design
 *.kicad_pcb-bak
