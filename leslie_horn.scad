@@ -1,21 +1,24 @@
 $fn=360;
 
+expansion_factor = 1.01;  // Allowance for model contraction
 wall_thickness = 3;       // Wall thickness
 horn_length = 120;        // Length of each horn
 throat_diameter = 25;     // Diameter at throat (narrow end)
-mouth_diameter = 100;     // Diameter at mouth (wide end)
+mouth_diameter = 80;      // Diameter at mouth (wide end)
 throat_tube_length = 20;  // Length of cylindrical tube at throat
 baffle_ratio=0.7;
 internal_diameter=60;
 drum_height=60;
 easement = 0.2;           // Clearance for fit
+entry_diameter=22;
 
 baffle_diameter=mouth_diameter * baffle_ratio;
 
 // Build adapter with flange
-horn();
-//drum();
+//horn();
+drum_assembly();
 //adapter_assembly(false);
+//drive_pulley();
 
 module adapter_assembly(open_through=false) {
     // Inner section: fits inside horn throat
@@ -103,6 +106,18 @@ module adapter_flange(height_factor=1.5, width_factor=1.2) {
                 cylinder(h=tube_height + 1, d=tube_inner_diameter, center=false);
         }
     }
+}
+
+module drum_assembly() {
+    difference() {
+        drum();
+        // Center hole for spindle
+        translate([0, 0, -1])
+            cylinder(h=wall_thickness + 2, d=entry_diameter*expansion_factor, center=false);
+    }
+            // Drive pulley on top
+    //translate([0, 0, drum_height])
+        drive_pulley();
 }
 
 module drum() {
@@ -237,6 +252,60 @@ module baffle_struts() {
                     }
                 }
             }
+        }
+    }
+}
+
+module drive_pulley() {
+    teeth = 80;
+    pitch = 2;  // 2mm pitch
+    belt_width = 9;           // Width of the drive belt
+    
+    // Calculate pitch diameter: (teeth × pitch) / π
+    pitch_diameter = expansion_factor * (teeth * pitch) / PI;
+    tooth_depth = 1.2;  // Standard GT2 tooth depth
+    pulley_outer_diameter = pitch_diameter + 1;
+    pulley_height = belt_width + 2;  // Belt track plus flanges
+    flange_height = 1;
+    
+    translate([0, 0, -pulley_height+flange_height]) {
+        difference() {
+            union() {
+                // Main pulley body with teeth
+                difference() {
+                    cylinder(h=pulley_height - 2*flange_height, d=pitch_diameter - 1, center=false);
+                    
+                    // Create teeth around the circumference
+                    for (i = [0:teeth-1]) {
+                        rotate([0, 0, i * 360/teeth])
+                            translate([pitch_diameter/2 - tooth_depth/2, 0, belt_width-3*flange_height])
+                                cube([tooth_depth, 1.2, belt_width], center=true);
+                    }
+                }
+                
+                // Bottom straight flange
+                cylinder(h=flange_height, d=pulley_outer_diameter, center=false);
+                
+                // Bottom tapered flange
+                translate([0, 0, flange_height])
+                    cylinder(h=flange_height, d1=pulley_outer_diameter, d2=pitch_diameter - 1, center=false);
+                
+                // Top tapered flange
+                translate([0, 0, pulley_height - 3*flange_height])
+                    cylinder(h=flange_height, d1=pitch_diameter - 1, d2=pulley_outer_diameter, center=false);
+                
+                // Top straight flange
+                translate([0, 0, pulley_height - 2*flange_height])
+                    cylinder(h=flange_height, d=pulley_outer_diameter, center=false);
+            }
+            
+            // Center hole for spindle
+            translate([0, 0, -1])
+                cylinder(h=pulley_height + 2, d=entry_diameter*expansion_factor, center=false);
+            
+            // Thrust bearing recess on bottom
+            translate([0, 0, -1])
+                cylinder(h=2, d=35*expansion_factor, center=false);
         }
     }
 }
